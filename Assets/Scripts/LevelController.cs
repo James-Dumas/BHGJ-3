@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
+    public int StartingMoney = 0;
     public GameObject PlayerPrefab;
     public EnemyWave[] EnemyWaves;
     public GameObject[] SpawnLocations;
@@ -23,6 +24,7 @@ public class LevelController : MonoBehaviour
         currentWave = 0;
         spawnQueue = new Queue<GameObject>();
         player = Instantiate(PlayerPrefab);
+        player.GetComponent<PlayerController>().Money = StartingMoney;
     }
 
     // Update is called once per frame

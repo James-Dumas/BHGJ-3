@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidbody;
     private int health;
 
+    public int Money { get; set; }
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();

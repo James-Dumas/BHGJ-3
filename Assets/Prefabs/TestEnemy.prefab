@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4604680712179667916}
   m_Layer: 11
   m_Name: TestEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,8 +136,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 100
   ShootTimer: 0.7
-  Spread: 4
+  Spread: 5
+  MaxHealth: 0
   Projectile: {fileID: 1465232673209310760, guid: 37dbbef7274da1e4cb6028ccfba7770d, type: 3}
   SightMask:
     serializedVersion: 2
-    m_Bits: 1664
+    m_Bits: 1536

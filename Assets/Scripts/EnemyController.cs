@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     public float Speed = 100f;
     public float ShootTimer = 1f;
     public float Spread = 0f;
+    public int MaxHealth;
     public GameObject Projectile;
     public LayerMask SightMask;
 
@@ -15,20 +16,23 @@ public class EnemyController : MonoBehaviour
     private bool hasLineOfSight;
     private float lastShootTime;
     private Vector2 movement;
+    private int health;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
         movement = -Vector2.up;
+        lastShootTime = Time.time;
+        health = MaxHealth;
     }
 
     void Update()
     {
-        Vector2 towardsPlayer = player.transform.position - transform.position;
-
+        Vector2 towardsPlayer = Vector2.up;
         if(player != null)
         {
+            towardsPlayer = player.transform.position - transform.position;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, towardsPlayer, 1000f, SightMask);
             hasLineOfSight = hit.collider.gameObject == player;
         }
@@ -62,5 +66,14 @@ public class EnemyController : MonoBehaviour
     {
         lastShootTime = Time.time;
         Instantiate(Projectile, transform.position + transform.forward * 0.5f, transform.rotation * Quaternion.Euler(0f, 0f, (Random.value - 0.5f) * Spread));
+    }
+
+    public void Damage(int amount)
+    {
+        health -= amount;
+        if(health == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
