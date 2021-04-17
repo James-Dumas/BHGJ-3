@@ -30,7 +30,7 @@ public class TurretController : MonoBehaviour
         {
             if(enemy != null)
             {
-                Vector2 towardsEnemy = enemy.transform.position = transform.position;
+                Vector2 towardsEnemy = enemy.transform.position - transform.position;
                 bool hasLineOfSight = Physics2D.Raycast(transform.position, towardsEnemy, 1000f, SightMask).collider.gameObject == enemy;
 
                 if(hasLineOfSight && towardsEnemy.magnitude < nearestVisibleEnemyDist)
