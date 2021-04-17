@@ -61,6 +61,6 @@ public class EnemyController : MonoBehaviour
     private void Shoot()
     {
         lastShootTime = Time.time;
-        Instantiate(Projectile, transform.position + transform.forward * 0.5f, transform.rotation);
+        Instantiate(Projectile, transform.position + transform.forward * 0.5f, transform.rotation * Quaternion.Euler(0f, 0f, (Random.value - 0.5f) * Spread));
     }
 }

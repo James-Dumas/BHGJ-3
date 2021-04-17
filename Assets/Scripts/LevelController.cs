@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
+    public GameObject PlayerPrefab;
     public EnemyWave[] EnemyWaves;
     public GameObject[] SpawnLocations;
     public LayerMask SpawnBlockLayerMask;
@@ -12,6 +14,7 @@ public class LevelController : MonoBehaviour
     private int currentWave;
     private Queue<GameObject> spawnQueue;
     private Collider2D[] res = new Collider2D[1];
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,7 @@ public class LevelController : MonoBehaviour
         lastWaveTime = Time.time;
         currentWave = 0;
         spawnQueue = new Queue<GameObject>();
+        player = Instantiate(PlayerPrefab);
     }
 
     // Update is called once per frame
@@ -44,6 +48,11 @@ public class LevelController : MonoBehaviour
                     Instantiate(spawnQueue.Dequeue(), spawnLocation.transform.position, spawnLocation.transform.rotation);
                 }
             }
+        }
+
+        if(Input.GetButtonDown("Reset"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
