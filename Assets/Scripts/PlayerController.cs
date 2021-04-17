@@ -5,12 +5,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float Speed = 100f;
+    public int MaxHealth = 3;
 
     private Rigidbody2D rigidbody;
+    private int health;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        health = MaxHealth;
     }
 
     void Update()
@@ -22,6 +25,15 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigidbody.velocity = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1) * Speed * Time.deltaTime;
+        rigidbody.velocity = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1) * Speed * Time.fixedDeltaTime;
+    }
+
+    public void Damage(int amount)
+    {
+        health -= amount;
+        if(health == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
