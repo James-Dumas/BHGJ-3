@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Tilemaps;
 public class LevelController : MonoBehaviour
 {
     public int StartingMoney = 0;
@@ -12,6 +14,7 @@ public class LevelController : MonoBehaviour
     public LayerMask SpawnBlockLayerMask;
     public Text WaveDisplay;
     public Text MoneyDisplay;
+    public Tile ShieldTile;
 
     private float lastWaveTime;
     private int currentWave;
@@ -57,5 +60,9 @@ public class LevelController : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        Color tileColor = ShieldTile.color;
+        tileColor.a = 0.65f + 0.1f * (float) Math.Sin(0.5 * Math.PI * Time.time);
+        ShieldTile.color = tileColor;
     }
 }

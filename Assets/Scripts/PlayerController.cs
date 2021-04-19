@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Tilemap FullBlockingTilemap;
     public Tilemap WalkBlockingTilemap;
     public Tilemap FunctionalTilemap;
+    public Tilemap ShieldTilemap;
     public Buildable[] BuildableHotbar;
 
     private Rigidbody2D rigidbody;
@@ -71,6 +72,11 @@ public class PlayerController : MonoBehaviour
                 if(mine != null)
                 {
                     mine.Tilemap = FunctionalTilemap;
+                }
+                ShieldEmitter shield = buildableObject.GetComponent<ShieldEmitter>();
+                if(shield != null)
+                {
+                    shield.Tilemap = ShieldTilemap;
                 }
             }
         }

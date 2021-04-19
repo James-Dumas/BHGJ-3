@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 327431088}
   - component: {fileID: 327431089}
   m_Layer: 9
-  m_Name: Full Blocking Tiles
+  m_Name: Full Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -928,8 +928,8 @@ GameObject:
   - component: {fileID: 473461470}
   - component: {fileID: 473461474}
   - component: {fileID: 473461473}
-  m_Layer: 7
-  m_Name: Bullet Blocking Tiles
+  m_Layer: 0
+  m_Name: Shields
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1597,7 +1597,7 @@ GameObject:
   - component: {fileID: 677335616}
   - component: {fileID: 677335615}
   m_Layer: 0
-  m_Name: Functional Tiles
+  m_Name: Buildables
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2537,7 +2537,7 @@ GameObject:
   - component: {fileID: 1282021486}
   - component: {fileID: 1282021485}
   m_Layer: 0
-  m_Name: Floor Tiles
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4164,6 +4164,7 @@ MonoBehaviour:
     m_Bits: 3072
   WaveDisplay: {fileID: 1439669481}
   MoneyDisplay: {fileID: 1488735404}
+  ShieldTile: {fileID: 11400000, guid: d68043e63f815cd43bd4fa888389cc02, type: 2}
 --- !u!4 &1552538080
 Transform:
   m_ObjectHideFlags: 0
@@ -4193,7 +4194,7 @@ GameObject:
   - component: {fileID: 1760011754}
   - component: {fileID: 1760011758}
   m_Layer: 8
-  m_Name: Walk Blocking TIles
+  m_Name: Half Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4473,9 +4474,11 @@ MonoBehaviour:
   FullBlockingTilemap: {fileID: 327431087}
   WalkBlockingTilemap: {fileID: 1760011757}
   FunctionalTilemap: {fileID: 677335616}
+  ShieldTilemap: {fileID: 473461472}
   BuildableHotbar:
   - {fileID: 11400000, guid: 3084fc11846add9498bca95d29b74db3, type: 2}
   - {fileID: 11400000, guid: ba29aaca9a9c43f4197e728c058b1b6c, type: 2}
+  - {fileID: 11400000, guid: 5e803ffca74faa0489a54d33111545f6, type: 2}
 --- !u!58 &3110242293989105365
 CircleCollider2D:
   m_ObjectHideFlags: 0
