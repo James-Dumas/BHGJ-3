@@ -74,6 +74,7 @@ public class EnemyController : MonoBehaviour
         health -= amount;
         if(health == 0)
         {
+            player.GetComponent<PlayerController>().Money += KillValue;
             Destroy(this.gameObject);
         }
     }
