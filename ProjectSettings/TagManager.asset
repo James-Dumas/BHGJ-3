@@ -48,11 +48,17 @@ TagManager:
   - name: Floor
     uniqueID: 586218711
     locked: 0
+  - name: Buildables
+    uniqueID: 4248149967
+    locked: 0
+  - name: Cast Shadows
+    uniqueID: 1238982529
+    locked: 0
   - name: Walls
     uniqueID: 2319713965
     locked: 0
-  - name: Objects
-    uniqueID: 4248149967
+  - name: Bevel Shadows
+    uniqueID: 1950086711
     locked: 0
   - name: Enemies
     uniqueID: 1821563935
