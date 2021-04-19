@@ -60,6 +60,9 @@ TagManager:
   - name: Bevel Shadows
     uniqueID: 1950086711
     locked: 0
+  - name: Ghost Tiles
+    uniqueID: 3726464143
+    locked: 0
   - name: Enemies
     uniqueID: 1821563935
     locked: 0

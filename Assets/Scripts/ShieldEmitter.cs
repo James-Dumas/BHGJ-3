@@ -39,11 +39,6 @@ public class ShieldEmitter : MonoBehaviour
                 Tilemap.SetTile(tilePos, ShieldTile);
             }
         }
-
-        if(active)
-        {
-            Tilemap.RefreshTile(tilePos);
-        }
     }
 
     void OnTriggerEnter2D(Collider2D col)

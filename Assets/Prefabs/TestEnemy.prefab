@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1821563935
-  m_SortingLayer: 4
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
   m_Color: {r: 1, g: 0.49803922, b: 0, a: 1}
@@ -138,7 +138,7 @@ MonoBehaviour:
   ShootTimer: 1
   Spread: 5
   MaxHealth: 20
-  KillValue: 5
+  KillValue: 2
   Projectile: {fileID: 1465232673209310760, guid: 37dbbef7274da1e4cb6028ccfba7770d, type: 3}
   SightMask:
     serializedVersion: 2

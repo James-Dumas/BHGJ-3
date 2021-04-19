@@ -14,7 +14,7 @@ public class LevelController : MonoBehaviour
     public LayerMask SpawnBlockLayerMask;
     public Text WaveDisplay;
     public Text MoneyDisplay;
-    public Tile ShieldTile;
+    public Tilemap ShieldTilemap;
 
     private float lastWaveTime;
     private int currentWave;
@@ -61,8 +61,8 @@ public class LevelController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        Color tileColor = ShieldTile.color;
-        tileColor.a = 0.65f + 0.1f * (float) Math.Sin(0.5 * Math.PI * Time.time);
-        ShieldTile.color = tileColor;
+        Color c = ShieldTilemap.color;
+        c.a = 0.6f + 0.1f * (float) Math.Sin(0.5 * Math.PI * Time.time);
+        ShieldTilemap.color = c;
     }
 }
