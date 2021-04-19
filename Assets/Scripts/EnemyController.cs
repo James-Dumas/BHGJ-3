@@ -7,7 +7,8 @@ public class EnemyController : MonoBehaviour
     public float Speed = 100f;
     public float ShootTimer = 1f;
     public float Spread = 0f;
-    public int MaxHealth;
+    public int MaxHealth = 20;
+    public int KillValue = 5;
     public GameObject Projectile;
     public LayerMask SightMask;
 

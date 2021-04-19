@@ -134,6 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4a3a37b8e45fd46b6b43d066066207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 280
-  SlowSpeed: 160
+  Speed: 300
+  SlowSpeed: 170
   MaxHealth: 3
+  PlacementBlockingTilemaps: []
+  PlacementTilemap: {fileID: 0}

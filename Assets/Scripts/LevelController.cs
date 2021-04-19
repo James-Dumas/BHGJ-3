@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class LevelController : MonoBehaviour
 {
     public int StartingMoney = 0;
-    public GameObject PlayerPrefab;
+    public PlayerController Player;
     public EnemyWave[] EnemyWaves;
     public GameObject[] SpawnLocations;
     public LayerMask SpawnBlockLayerMask;
+    public Text WaveDisplay;
+    public Text MoneyDisplay;
 
     private float lastWaveTime;
     private int currentWave;
     private Queue<GameObject> spawnQueue;
     private Collider2D[] res = new Collider2D[1];
-    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -23,13 +24,15 @@ public class LevelController : MonoBehaviour
         lastWaveTime = Time.time;
         currentWave = 0;
         spawnQueue = new Queue<GameObject>();
-        player = Instantiate(PlayerPrefab);
-        player.GetComponent<PlayerController>().Money = StartingMoney;
+        Player.Money = StartingMoney;
     }
 
     // Update is called once per frame
     void Update()
     {
+        WaveDisplay.text = $"Wave {(currentWave > 0 ? currentWave.ToString() : "--")}/{EnemyWaves.Length}";
+        MoneyDisplay.text = $"${Player.Money}";
+
         if(Time.time - lastWaveTime > 10f && currentWave < EnemyWaves.Length)
         {
             lastWaveTime = Time.time;
