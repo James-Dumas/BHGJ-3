@@ -922,7 +922,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 366109796}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3172,7 +3172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingMoney: 20
-  Player: {fileID: 3110242293989105371}
+  Player: {fileID: 3110242293989105364}
   EnemyWaves:
   - {fileID: 11400000, guid: be9dd9c813d2db54594df1df5ab6f4eb, type: 2}
   - {fileID: 11400000, guid: 8c101f924a54a45489740070a7cc820e, type: 2}
@@ -3181,6 +3181,8 @@ MonoBehaviour:
   SpawnBlockLayerMask:
     serializedVersion: 2
     m_Bits: 3072
+  WaveDisplay: {fileID: 1439669481}
+  MoneyDisplay: {fileID: 1488735404}
 --- !u!4 &1552538080
 Transform:
   m_ObjectHideFlags: 0

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Test Turret
   m_EditorClassIdentifier: 
   Object: {fileID: 6942275311696744398, guid: a3792e0d0e1cc1b4997146b0f8a61679, type: 3}
-  Tile: {fileID: 11400000, guid: 6c6238314d9ca6b459e87028b7d4c49c, type: 2}
+  Tile: {fileID: 11400000, guid: b365f402cb9056742957e37ced51966a, type: 2}
   Price: 10
