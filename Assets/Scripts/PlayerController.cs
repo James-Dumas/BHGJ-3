@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         health = MaxHealth;
-        hotbarSelection = 0;
+        hotbarSelection = -1;
     }
 
     void Update()
@@ -34,6 +34,14 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float lookAngle = Vector2.SignedAngle(Vector2.up, (Vector2) (mousePos - transform.position));
         transform.rotation = Quaternion.Euler(0f, 0f, lookAngle);
+
+        for(int i = 0; i < BuildableHotbar.Length; i++)
+        {
+            if(Input.GetButtonDown($"Item {i + 1}"))
+            {
+                hotbarSelection = i;
+            }
+        }
 
         Vector3Int hoveredTilePos = FunctionalTilemap.WorldToCell(mousePos);
         Vector3 hoveredTileCenter = FunctionalTilemap.CellToWorld(hoveredTilePos) + new Vector3(0.5f, 0.5f, 0f);
@@ -47,7 +55,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                
+
             }
         }
 
@@ -57,9 +65,19 @@ public class PlayerController : MonoBehaviour
             {
                 Buildable selectedBuildable = BuildableHotbar[hotbarSelection];
                 FunctionalTilemap.SetTile(hoveredTilePos, selectedBuildable.Tile);
-                Instantiate(selectedBuildable.Object, hoveredTileCenter, Quaternion.identity);
+                GameObject buildableObject = Instantiate(selectedBuildable.Object, hoveredTileCenter, Quaternion.identity);
                 Money -= selectedBuildable.Price;
+                ProximityMine mine = buildableObject.GetComponent<ProximityMine>();
+                if(mine != null)
+                {
+                    mine.Tilemap = FunctionalTilemap;
+                }
             }
+        }
+        
+        if(Input.GetButtonDown("Right Click"))
+        {
+            hotbarSelection = -1;
         }
     }
 

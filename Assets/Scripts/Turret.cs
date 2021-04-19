@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretController : MonoBehaviour
+public class Turret : MonoBehaviour
 {
     public float ShootTimer = 1f;
     public float Spread = 0f;
@@ -12,15 +12,14 @@ public class TurretController : MonoBehaviour
 
     private List<GameObject> targetingEnemies;
     private float lastShootTime;
+    private float beatTime;
 
-    // Start is called before the first frame update
     void Start()
     {
         targetingEnemies = new List<GameObject>();
         lastShootTime = Time.time;
     }
 
-    // Update is called once per frame
     void Update()
     {
         GameObject nearestVisibleEnemy = null;

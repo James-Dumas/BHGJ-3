@@ -18,7 +18,6 @@ public class LevelController : MonoBehaviour
     private Queue<GameObject> spawnQueue;
     private Collider2D[] res = new Collider2D[1];
 
-    // Start is called before the first frame update
     void Start()
     {
         lastWaveTime = Time.time;
@@ -27,7 +26,6 @@ public class LevelController : MonoBehaviour
         Player.Money = StartingMoney;
     }
 
-    // Update is called once per frame
     void Update()
     {
         WaveDisplay.text = $"Wave {(currentWave > 0 ? currentWave.ToString() : "--")}/{EnemyWaves.Length}";

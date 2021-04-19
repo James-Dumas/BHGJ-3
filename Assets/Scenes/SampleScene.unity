@@ -3512,6 +3512,7 @@ MonoBehaviour:
   FunctionalTilemap: {fileID: 677335616}
   BuildableHotbar:
   - {fileID: 11400000, guid: 3084fc11846add9498bca95d29b74db3, type: 2}
+  - {fileID: 11400000, guid: ba29aaca9a9c43f4197e728c058b1b6c, type: 2}
 --- !u!58 &3110242293989105365
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     private float lastShootTime;
     private Vector2 movement;
     private int health;
+    private float beatTime;
 
     void Start()
     {

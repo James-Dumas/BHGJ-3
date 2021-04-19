@@ -135,9 +135,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 100
-  ShootTimer: 0.7
+  ShootTimer: 1
   Spread: 5
   MaxHealth: 20
+  KillValue: 5
   Projectile: {fileID: 1465232673209310760, guid: 37dbbef7274da1e4cb6028ccfba7770d, type: 3}
   SightMask:
     serializedVersion: 2
