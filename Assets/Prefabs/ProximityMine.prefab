@@ -63,5 +63,6 @@ MonoBehaviour:
   PlacementCooldown: 1
   TriggerRadius: 1
   DamageRadius: 2.5
-  MaxDamage: 20
-  MinDamage: 5
+  MaxDamage: 12
+  MinDamage: 2
+  Tilemap: {fileID: 0}

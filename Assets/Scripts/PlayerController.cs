@@ -109,12 +109,16 @@ public class PlayerController : MonoBehaviour
         {
             rigidbody.velocity = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1) * (Input.GetButton("Slow Move") ? SlowSpeed : Speed) * Time.fixedDeltaTime;
         }
+        else
+        {
+            rigidbody.velocity = Vector2.zero;
+        }
     }
 
     public void Damage(int amount)
     {
         health -= amount;
-        if(health == 0)
+        if(health <= 0)
         {
             Alive = false;
             GetComponent<Collider2D>().enabled = false;

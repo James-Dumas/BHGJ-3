@@ -49,13 +49,26 @@ public class EnemyController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, lookAngle);
             if(Time.time - lastShootTime > ShootTimer)
             {
-                Shoot();
+                Shoot(towardsPlayer.normalized);
             }
         }
         else
         {
             float lookAngle = Vector2.SignedAngle(Vector2.up, movement);
             transform.rotation = Quaternion.Euler(0f, 0f, lookAngle);
+        }
+
+        if(towardsPlayer.magnitude < 4)
+        {
+            movement = -towardsPlayer.normalized;
+        }
+        else if(towardsPlayer.magnitude > 6)
+        {
+            movement = 0.7f * towardsPlayer.normalized;
+        }
+        else
+        {
+            movement = 0.4f * Vector2.Perpendicular(towardsPlayer).normalized;
         }
     }
 
@@ -64,16 +77,17 @@ public class EnemyController : MonoBehaviour
         rigidbody.velocity = movement * Speed * Time.fixedDeltaTime;
     }
 
-    private void Shoot()
+    private void Shoot(Vector2 direction)
     {
         lastShootTime = Time.time;
-        Instantiate(Projectile, transform.position + transform.forward * 0.5f, transform.rotation * Quaternion.Euler(0f, 0f, (Random.value - 0.5f) * Spread));
+        float angle = Vector2.SignedAngle(Vector2.up, direction);
+        Instantiate(Projectile, transform.position + new Vector3(direction.x, direction.y, 0f) * 0.5f, Quaternion.Euler(0f, 0f, angle));
     }
 
     public void Damage(int amount)
     {
         health -= amount;
-        if(health == 0)
+        if(health <= 0)
         {
             player.GetComponent<PlayerController>().Money += KillValue;
             Destroy(this.gameObject);

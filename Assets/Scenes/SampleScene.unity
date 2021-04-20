@@ -4091,6 +4091,14 @@ MonoBehaviour:
   EnemyWaves:
   - {fileID: 11400000, guid: be9dd9c813d2db54594df1df5ab6f4eb, type: 2}
   - {fileID: 11400000, guid: 8c101f924a54a45489740070a7cc820e, type: 2}
+  - {fileID: 11400000, guid: 8c101f924a54a45489740070a7cc820e, type: 2}
+  - {fileID: 11400000, guid: 5166e1e0ceaa21e43ac9df2794536894, type: 2}
+  - {fileID: 11400000, guid: 5166e1e0ceaa21e43ac9df2794536894, type: 2}
+  - {fileID: 11400000, guid: a22fd44413f991a4589d6e079edd978e, type: 2}
+  - {fileID: 11400000, guid: a22fd44413f991a4589d6e079edd978e, type: 2}
+  - {fileID: 11400000, guid: 54cc1a948b365e249a2c0737d3b98b9d, type: 2}
+  - {fileID: 11400000, guid: 54cc1a948b365e249a2c0737d3b98b9d, type: 2}
+  - {fileID: 11400000, guid: 54cc1a948b365e249a2c0737d3b98b9d, type: 2}
   SpawnLocations:
   - {fileID: 1039867084}
   SpawnBlockLayerMask:
@@ -4521,7 +4529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 300
   SlowSpeed: 160
-  MaxHealth: 5
+  MaxHealth: 3
   PlacementDistance: 5
   FloorTilemap: {fileID: 1282021486}
   FullBlockingTilemap: {fileID: 327431087}
