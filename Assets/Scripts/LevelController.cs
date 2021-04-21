@@ -20,6 +20,7 @@ public class LevelController : MonoBehaviour
     public Tilemap ShieldTilemap;
     public GameObject PreStartOverlay;
     public GameObject InGameUI;
+    public GameObject Kot;
 
     private bool started;
     private float startTime;
@@ -29,6 +30,21 @@ public class LevelController : MonoBehaviour
     private int currentWave;
     private Queue<GameObject> spawnQueue;
     private Collider2D[] res = new Collider2D[1];
+    private int sequenceCompletion = 0;
+
+    private static string[] the_sequence = {
+        "up",
+        "up",
+        "down",
+        "down",
+        "left",
+        "right",
+        "left",
+        "right",
+        "b",
+        "a",
+        "return"
+    };
 
     void Start()
     {
@@ -103,6 +119,24 @@ public class LevelController : MonoBehaviour
         if(!started && Input.GetButtonDown("Start Level"))
         {
             StartLevel();
+        }
+
+        if(sequenceCompletion < the_sequence.Length && Input.anyKeyDown)
+        {
+            if(Input.GetKeyDown(the_sequence[sequenceCompletion]))
+            {
+                sequenceCompletion++;
+            }
+            else
+            {
+                sequenceCompletion = 0;
+            }
+            Debug.Log(sequenceCompletion);
+
+            if(sequenceCompletion == the_sequence.Length)
+            {
+                Kot.SetActive(true);
+            }
         }
     }
 

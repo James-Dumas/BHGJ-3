@@ -4975,6 +4975,7 @@ MonoBehaviour:
   ShieldTilemap: {fileID: 473461472}
   PreStartOverlay: {fileID: 1055738949}
   InGameUI: {fileID: 477995240}
+  Kot: {fileID: 1469236534}
 --- !u!4 &1552538080
 Transform:
   m_ObjectHideFlags: 0
