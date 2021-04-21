@@ -28,7 +28,7 @@ public class BulletController : MonoBehaviour
 
         if(col.gameObject.tag == "Enemy")
         {
-            col.gameObject.GetComponent<EnemyController>().Damage(Damage);
+            col.gameObject.GetComponent<BaseEnemy>().Damage(Damage);
         }
     }
 }

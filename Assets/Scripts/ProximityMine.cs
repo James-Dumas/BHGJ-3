@@ -44,7 +44,7 @@ public class ProximityMine : MonoBehaviour
                 if(dist < DamageRadius)
                 {
                     int damage = (int) Math.Ceiling(Math.Min(MaxDamage, Math.Max(MinDamage, (DamageRadius - dist) / DamageRadius * (MaxDamage - MinDamage) + MinDamage)));
-                    enemy.GetComponent<EnemyController>().Damage(damage);
+                    enemy.GetComponent<BaseEnemy>().Damage(damage);
                 }
             }
 

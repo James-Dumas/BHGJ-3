@@ -14,6 +14,8 @@ public class LevelController : MonoBehaviour
     public LayerMask SpawnBlockLayerMask;
     public Text WaveDisplay;
     public Text MoneyDisplay;
+    public Tilemap FullWallTilemap;
+    public Tilemap HalfWallTilemap;
     public Tilemap ShieldTilemap;
 
     private float lastWaveTime;
@@ -51,7 +53,9 @@ public class LevelController : MonoBehaviour
             {
                 if(Physics2D.OverlapCircleNonAlloc(spawnLocation.transform.position, 0.5f, res, SpawnBlockLayerMask) == 0)
                 {
-                    Instantiate(spawnQueue.Dequeue(), spawnLocation.transform.position, spawnLocation.transform.rotation);
+                    BaseEnemy newEnemy = Instantiate(spawnQueue.Dequeue(), spawnLocation.transform.position, spawnLocation.transform.rotation).GetComponent<BaseEnemy>();
+                    newEnemy.FullWallTilemap = FullWallTilemap;
+                    newEnemy.HalfWallTilemap = HalfWallTilemap;
                 }
             }
         }
