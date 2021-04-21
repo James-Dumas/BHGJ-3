@@ -14,18 +14,25 @@ public class LevelController : MonoBehaviour
     public LayerMask SpawnBlockLayerMask;
     public Text WaveDisplay;
     public Text MoneyDisplay;
+    public Text Countdown;
     public Tilemap FullWallTilemap;
     public Tilemap HalfWallTilemap;
     public Tilemap ShieldTilemap;
 
-    private float lastWaveTime;
+    private float startTime;
+    private float nextWaveTime;
+    private float nextSecondTime;
+    private int countdownValue;
     private int currentWave;
     private Queue<GameObject> spawnQueue;
     private Collider2D[] res = new Collider2D[1];
 
     void Start()
     {
-        lastWaveTime = Time.time;
+        startTime = Time.time;
+        nextWaveTime = startTime + 10f;
+        nextSecondTime = startTime + 1f;
+        countdownValue = 10;
         currentWave = 0;
         spawnQueue = new Queue<GameObject>();
         Player.Money = StartingMoney;
@@ -36,15 +43,37 @@ public class LevelController : MonoBehaviour
         WaveDisplay.text = $"Wave {(currentWave > 0 ? currentWave.ToString() : "--")}/{EnemyWaves.Length}";
         MoneyDisplay.text = $"${Player.Money}";
 
-        if(Time.time - lastWaveTime > 10f && currentWave < EnemyWaves.Length)
+        if(Time.time > nextWaveTime && currentWave < EnemyWaves.Length)
         {
-            lastWaveTime = Time.time;
+            nextWaveTime += 10f;
             foreach(GameObject enemyObj in EnemyWaves[currentWave].Enemies)
             {
                 spawnQueue.Enqueue(enemyObj);
             }
 
             currentWave++;
+        }
+
+        if(Countdown.transform.localScale.sqrMagnitude > 2)
+        {
+            Countdown.transform.localScale -= new Vector3(4f, 4f, 0f) * Time.deltaTime;
+        }
+        else if(Countdown.transform.localScale.sqrMagnitude < 2)
+        {
+            Countdown.transform.localScale = new Vector3(1f, 1f, 0);
+        }
+
+        if(Time.time > nextSecondTime)
+        {
+            nextSecondTime += 1f;
+            countdownValue--;
+            if(countdownValue == 0)
+            {
+                countdownValue = 10;
+            }
+
+            Countdown.text = countdownValue.ToString();
+            Countdown.transform.localScale = new Vector3(1.4f, 1.4f, 0f);
         }
 
         foreach(GameObject spawnLocation in SpawnLocations)
