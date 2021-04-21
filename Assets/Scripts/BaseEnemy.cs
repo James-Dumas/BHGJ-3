@@ -19,19 +19,21 @@ public abstract class BaseEnemy : MonoBehaviour
     protected Rigidbody2D rigidbody;
     protected GameObject player;
     protected bool hasLineOfSight;
-    protected float lastShootTime;
+    protected float nextShootTime;
+    protected bool canShoot;
     protected Vector2 movement;
     protected int health;
-    protected float beatTime;
     protected Vector2 towardsPlayer;
     protected PathfindingNodeQueue openNodes;
     protected HashSet<Vector2Int> closedNodes;
     protected LinkedList<Vector2> path;
+    protected float lastPathCheck;
+
+    public float BeatTime { get; set; }
 
     protected static Vector2Int[] adjacents;
     protected static Vector2Int[] diagonals;
 
-    private float lastPathCheck;
 
     static BaseEnemy()
     {
@@ -55,7 +57,7 @@ public abstract class BaseEnemy : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
         movement = Vector2.zero;
-        lastShootTime = Time.time;
+        nextShootTime = BeatTime;
         lastPathCheck = 0f;
         health = MaxHealth;
         towardsPlayer = Vector2.zero;
@@ -92,6 +94,13 @@ public abstract class BaseEnemy : MonoBehaviour
             }
             movement = towardsNextPos.normalized;
         }
+
+        canShoot = false;
+        if(Time.time > nextShootTime)
+        {
+            nextShootTime += ShootTimer;
+            canShoot = true;
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -102,7 +111,6 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected void Shoot(Vector2 direction)
     {
-        lastShootTime = Time.time;
         float angle = Vector2.SignedAngle(Vector2.up, direction);
         Instantiate(Projectile, transform.position + new Vector3(direction.x, direction.y, 0f) * 0.5f, Quaternion.Euler(0f, 0f, angle));
     }

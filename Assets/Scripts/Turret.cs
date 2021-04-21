@@ -5,19 +5,20 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    public float ShootTimer = 1f;
+    public float ShootTimer = 0.5f;
     public float Spread = 0f;
     public GameObject Projectile;
     public LayerMask SightMask;
 
     private List<GameObject> targetingEnemies;
-    private float lastShootTime;
-    private float beatTime;
+    private float nextShootTime;
+
+    public float BeatTime { get; set; }
 
     void Start()
     {
         targetingEnemies = new List<GameObject>();
-        lastShootTime = Time.time;
+        nextShootTime = BeatTime;
     }
 
     void Update()
@@ -41,10 +42,15 @@ public class Turret : MonoBehaviour
             }
         }
 
-        if(nearestVisibleEnemy != null && Time.time - lastShootTime > ShootTimer)
+        if(Time.time > nextShootTime)
         {
-            Shoot(towardsNearestEnemy.normalized);
+            nextShootTime += ShootTimer;
+            if(nearestVisibleEnemy != null)
+            {
+                Shoot(towardsNearestEnemy.normalized);
+            }
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -59,7 +65,6 @@ public class Turret : MonoBehaviour
 
     private void Shoot(Vector2 direction)
     {
-        lastShootTime = Time.time;
         float angle = Vector2.SignedAngle(Vector2.up, direction);
         Instantiate(Projectile, transform.position + new Vector3(direction.x, direction.y, 0f) * 0.5f, Quaternion.Euler(0f, 0f, angle));
     }

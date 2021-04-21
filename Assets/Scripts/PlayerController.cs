@@ -21,12 +21,16 @@ public class PlayerController : MonoBehaviour
     private int health;
     private int hotbarSelection;
     private bool canPlace;
+    private float nextSecondTime;
 
+    public bool LevelStarted { get; set; }
     public bool Alive { get; private set; }
     public int Money { get; set; }
+    public float BeatTime { get; set; }
 
     void Start()
     {
+        LevelStarted = false;
         rigidbody = GetComponent<Rigidbody2D>();
         health = MaxHealth;
         Alive = true;
@@ -35,83 +39,100 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int hoveredTilePos = FunctionalTilemap.WorldToCell(mousePos);
-        Vector3 hoveredTileCenter = FunctionalTilemap.CellToWorld(hoveredTilePos) + new Vector3(0.5f, 0.5f, 0f);
-        GhostTilemap.ClearAllTiles();
-        canPlace = false;
-        if(hotbarSelection >= 0)
+        if(LevelStarted)
         {
-            Buildable selectedBuildable = BuildableHotbar[hotbarSelection];
-            Color c;
-            if(Money >= selectedBuildable.Price && (hoveredTileCenter - transform.position).magnitude < PlacementDistance && FloorTilemap.HasTile(hoveredTilePos) && !(FullBlockingTilemap.HasTile(hoveredTilePos) || WalkBlockingTilemap.HasTile(hoveredTilePos) || FunctionalTilemap.HasTile(hoveredTilePos)))
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int hoveredTilePos = FunctionalTilemap.WorldToCell(mousePos);
+            Vector3 hoveredTileCenter = FunctionalTilemap.CellToWorld(hoveredTilePos) + new Vector3(0.5f, 0.5f, 0f);
+            GhostTilemap.ClearAllTiles();
+            canPlace = false;
+            if(hotbarSelection >= 0)
             {
-                canPlace = true;
-                c = Color.white;
-
-            }
-            else
-            {
-                c = Color.red;
-                c.g = 0.5f;
-                c.b = 0.5f;
-            }
-
-            c.a = 0.5f;
-            GhostTilemap.color = c;
-            GhostTilemap.SetTile(hoveredTilePos, selectedBuildable.Tile);
-        }
-
-        if(Alive)
-        {
-            float lookAngle = Vector2.SignedAngle(Vector2.up, (Vector2) (mousePos - transform.position));
-            transform.rotation = Quaternion.Euler(0f, 0f, lookAngle);
-
-            for(int i = 0; i < BuildableHotbar.Length; i++)
-            {
-                if(Input.GetButtonDown($"Item {i + 1}"))
+                Buildable selectedBuildable = BuildableHotbar[hotbarSelection];
+                Color c;
+                if(Money >= selectedBuildable.Price && (hoveredTileCenter - transform.position).magnitude < PlacementDistance && FloorTilemap.HasTile(hoveredTilePos) && !(FullBlockingTilemap.HasTile(hoveredTilePos) || WalkBlockingTilemap.HasTile(hoveredTilePos) || FunctionalTilemap.HasTile(hoveredTilePos)))
                 {
-                    hotbarSelection = i;
+                    canPlace = true;
+                    c = Color.white;
+
                 }
+                else
+                {
+                    c = Color.red;
+                    c.g = 0.5f;
+                    c.b = 0.5f;
+                }
+
+                c.a = 0.5f;
+                GhostTilemap.color = c;
+                GhostTilemap.SetTile(hoveredTilePos, selectedBuildable.Tile);
             }
 
-            if(Input.GetButtonDown("Left Click"))
+            if(Time.time > nextSecondTime)
             {
-                if(hotbarSelection >= 0 && canPlace)
+                nextSecondTime += 1f;
+            }
+
+            if(Alive)
+            {
+                float lookAngle = Vector2.SignedAngle(Vector2.up, (Vector2) (mousePos - transform.position));
+                transform.rotation = Quaternion.Euler(0f, 0f, lookAngle);
+
+                for(int i = 0; i < BuildableHotbar.Length; i++)
                 {
-                    Buildable selectedBuildable = BuildableHotbar[hotbarSelection];
-                    FunctionalTilemap.SetTile(hoveredTilePos, selectedBuildable.Tile);
-                    GameObject buildableObject = Instantiate(selectedBuildable.Object, hoveredTileCenter, Quaternion.identity);
-                    Money -= selectedBuildable.Price;
-                    ProximityMine mine = buildableObject.GetComponent<ProximityMine>();
-                    if(mine != null)
+                    if(Input.GetButtonDown($"Item {i + 1}"))
                     {
-                        mine.Tilemap = FunctionalTilemap;
-                    }
-                    ShieldEmitter shield = buildableObject.GetComponent<ShieldEmitter>();
-                    if(shield != null)
-                    {
-                        shield.Tilemap = ShieldTilemap;
+                        hotbarSelection = i;
                     }
                 }
-            }
-            
-            if(Input.GetButtonDown("Right Click"))
-            {
-                hotbarSelection = -1;
+
+                if(Input.GetButtonDown("Left Click"))
+                {
+                    if(hotbarSelection >= 0 && canPlace)
+                    {
+                        Buildable selectedBuildable = BuildableHotbar[hotbarSelection];
+                        FunctionalTilemap.SetTile(hoveredTilePos, selectedBuildable.Tile);
+                        GameObject buildableObject = Instantiate(selectedBuildable.Object, hoveredTileCenter, Quaternion.identity);
+                        Money -= selectedBuildable.Price;
+                        Turret turret = buildableObject.GetComponent<Turret>();
+                        if(turret != null)
+                        {
+                            turret.BeatTime = nextSecondTime;
+                        }
+                        ProximityMine mine = buildableObject.GetComponent<ProximityMine>();
+                        if(mine != null)
+                        {
+                            mine.Tilemap = FunctionalTilemap;
+                            mine.BeatTime = nextSecondTime;
+                        }
+                        ShieldEmitter shield = buildableObject.GetComponent<ShieldEmitter>();
+                        if(shield != null)
+                        {
+                            shield.Tilemap = ShieldTilemap;
+                        }
+                    }
+                }
+                
+                if(Input.GetButtonDown("Right Click"))
+                {
+                    hotbarSelection = -1;
+                }
             }
         }
     }
 
     void FixedUpdate()
     {
-        if(Alive)
+        if(LevelStarted)
         {
-            rigidbody.velocity = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1) * (Input.GetButton("Slow Move") ? SlowSpeed : Speed) * Time.fixedDeltaTime;
-        }
-        else
-        {
-            rigidbody.velocity = Vector2.zero;
+            if(Alive)
+            {
+                rigidbody.velocity = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1) * (Input.GetButton("Slow Move") ? SlowSpeed : Speed) * Time.fixedDeltaTime;
+            }
+            else
+            {
+                rigidbody.velocity = Vector2.zero;
+            }
         }
     }
 

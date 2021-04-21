@@ -15,14 +15,17 @@ public class ProximityMine : MonoBehaviour
 
     private float placementTime;
     private bool isTriggered;
+    private float nextShootTime;
     private List<GameObject> nearbyEnemies;
-    private float beatTime;
+
+    public float BeatTime { get; set; }
 
     void Start()
     {
         placementTime = Time.time;
         isTriggered = false;
         nearbyEnemies = new List<GameObject>();
+        nextShootTime = BeatTime;
     }
 
     void Update()
@@ -35,21 +38,25 @@ public class ProximityMine : MonoBehaviour
             }
         }
 
-        if(isTriggered)
+        if(Time.time > nextShootTime)
         {
-            // my main goal
-            foreach(GameObject enemy in nearbyEnemies)
+            nextShootTime += 1f;
+            if(isTriggered)
             {
-                float dist = (enemy.transform.position - transform.position).magnitude;
-                if(dist < DamageRadius)
+                // my main goal
+                foreach(GameObject enemy in nearbyEnemies)
                 {
-                    int damage = (int) Math.Ceiling(Math.Min(MaxDamage, Math.Max(MinDamage, (DamageRadius - dist) / DamageRadius * (MaxDamage - MinDamage) + MinDamage)));
-                    enemy.GetComponent<BaseEnemy>().Damage(damage);
+                    float dist = (enemy.transform.position - transform.position).magnitude;
+                    if(dist < DamageRadius)
+                    {
+                        int damage = (int) Math.Ceiling(Math.Min(MaxDamage, Math.Max(MinDamage, (DamageRadius - dist) / DamageRadius * (MaxDamage - MinDamage) + MinDamage)));
+                        enemy.GetComponent<BaseEnemy>().Damage(damage);
+                    }
                 }
-            }
 
-            Tilemap.SetTile(Tilemap.WorldToCell(transform.position), null);
-            Destroy(this.gameObject);
+                Tilemap.SetTile(Tilemap.WorldToCell(transform.position), null);
+                Destroy(this.gameObject);
+            }
         }
     }
 

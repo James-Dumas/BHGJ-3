@@ -18,7 +18,10 @@ public class LevelController : MonoBehaviour
     public Tilemap FullWallTilemap;
     public Tilemap HalfWallTilemap;
     public Tilemap ShieldTilemap;
+    public GameObject PreStartOverlay;
+    public GameObject InGameUI;
 
+    private bool started;
     private float startTime;
     private float nextWaveTime;
     private float nextSecondTime;
@@ -29,73 +32,92 @@ public class LevelController : MonoBehaviour
 
     void Start()
     {
-        startTime = Time.time;
-        nextWaveTime = startTime + 10f;
-        nextSecondTime = startTime + 1f;
-        countdownValue = 10;
-        currentWave = 0;
+        started = false;
         spawnQueue = new Queue<GameObject>();
-        Player.Money = StartingMoney;
     }
 
     void Update()
     {
-        WaveDisplay.text = $"Wave {(currentWave > 0 ? currentWave.ToString() : "--")}/{EnemyWaves.Length}";
-        MoneyDisplay.text = $"${Player.Money}";
-
-        if(Time.time > nextWaveTime && currentWave < EnemyWaves.Length)
+        if(started)
         {
-            nextWaveTime += 10f;
-            foreach(GameObject enemyObj in EnemyWaves[currentWave].Enemies)
+            WaveDisplay.text = $"Wave {(currentWave > 0 ? currentWave.ToString() : "--")}/{EnemyWaves.Length}";
+            MoneyDisplay.text = $"${Player.Money}";
+
+            if(Time.time > nextWaveTime && currentWave < EnemyWaves.Length)
             {
-                spawnQueue.Enqueue(enemyObj);
-            }
-
-            currentWave++;
-        }
-
-        if(Countdown.transform.localScale.sqrMagnitude > 2)
-        {
-            Countdown.transform.localScale -= new Vector3(4f, 4f, 0f) * Time.deltaTime;
-        }
-        else if(Countdown.transform.localScale.sqrMagnitude < 2)
-        {
-            Countdown.transform.localScale = new Vector3(1f, 1f, 0);
-        }
-
-        if(Time.time > nextSecondTime)
-        {
-            nextSecondTime += 1f;
-            countdownValue--;
-            if(countdownValue == 0)
-            {
-                countdownValue = 10;
-            }
-
-            Countdown.text = countdownValue.ToString();
-            Countdown.transform.localScale = new Vector3(1.4f, 1.4f, 0f);
-        }
-
-        foreach(GameObject spawnLocation in SpawnLocations)
-        {
-            if(spawnQueue.Count != 0)
-            {
-                if(Physics2D.OverlapCircleNonAlloc(spawnLocation.transform.position, 0.5f, res, SpawnBlockLayerMask) == 0)
+                nextWaveTime += 10f;
+                foreach(GameObject enemyObj in EnemyWaves[currentWave].Enemies)
                 {
-                    BaseEnemy newEnemy = Instantiate(spawnQueue.Dequeue(), spawnLocation.transform.position, spawnLocation.transform.rotation).GetComponent<BaseEnemy>();
-                    newEnemy.FullWallTilemap = FullWallTilemap;
-                    newEnemy.HalfWallTilemap = HalfWallTilemap;
+                    spawnQueue.Enqueue(enemyObj);
+                }
+
+                currentWave++;
+            }
+
+            if(Countdown.transform.localScale.x > 1)
+            {
+                Countdown.transform.localScale -= new Vector3(4f, 4f, 0f) * Time.deltaTime;
+            }
+            else if(Countdown.transform.localScale.x < 1)
+            {
+                Countdown.transform.localScale = new Vector3(1f, 1f, 0);
+            }
+
+            if(Time.time > nextSecondTime)
+            {
+                nextSecondTime += 1f;
+                countdownValue--;
+                if(countdownValue == 0)
+                {
+                    countdownValue = 10;
+                }
+
+                Countdown.text = countdownValue.ToString();
+                Countdown.transform.localScale = new Vector3(1.4f, 1.4f, 0f);
+            }
+
+            foreach(GameObject spawnLocation in SpawnLocations)
+            {
+                if(spawnQueue.Count != 0)
+                {
+                    if(Physics2D.OverlapCircleNonAlloc(spawnLocation.transform.position, 0.5f, res, SpawnBlockLayerMask) == 0)
+                    {
+                        BaseEnemy newEnemy = Instantiate(spawnQueue.Dequeue(), spawnLocation.transform.position, spawnLocation.transform.rotation).GetComponent<BaseEnemy>();
+                        newEnemy.FullWallTilemap = FullWallTilemap;
+                        newEnemy.HalfWallTilemap = HalfWallTilemap;
+                        newEnemy.BeatTime = nextSecondTime;
+                    }
                 }
             }
+
+            if(Input.GetButtonDown("Reset"))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+
+            Color c = ShieldTilemap.color;
+            c.a = 0.6f + 0.1f * (float) Math.Sin(0.5 * Math.PI * Time.time);
+            ShieldTilemap.color = c;
         }
 
-        if(Input.GetButtonDown("Reset"))
+        if(!started && Input.GetButtonDown("Start Level"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            StartLevel();
         }
+    }
 
-        Color c = ShieldTilemap.color;
-        c.a = 0.6f + 0.1f * (float) Math.Sin(0.5 * Math.PI * Time.time);
-        ShieldTilemap.color = c;
+    public void StartLevel()
+    {
+        started = true;
+        startTime = Time.time + 0.1f;
+        nextWaveTime = startTime + 10f;
+        nextSecondTime = startTime + 1f;
+        countdownValue = 10;
+        currentWave = 0;
+        Player.Money = StartingMoney;
+        Player.BeatTime = startTime;
+        Player.LevelStarted = true;
+        PreStartOverlay.SetActive(false);
+        InGameUI.SetActive(true);
     }
 }

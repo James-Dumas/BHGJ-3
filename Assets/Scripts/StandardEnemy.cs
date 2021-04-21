@@ -12,7 +12,7 @@ public class StandardEnemy : BaseEnemy
         {
             float lookAngle = Vector2.SignedAngle(Vector2.up, towardsPlayer);
             transform.rotation = Quaternion.Euler(0f, 0f, lookAngle);
-            if(Time.time - lastShootTime > ShootTimer)
+            if(canShoot)
             {
                 Shoot(towardsPlayer.normalized);
             }
@@ -22,5 +22,6 @@ public class StandardEnemy : BaseEnemy
             float lookAngle = Vector2.SignedAngle(Vector2.up, rigidbody.velocity);
             transform.rotation = Quaternion.Euler(0f, 0f, lookAngle);
         }
+
     }
 }
