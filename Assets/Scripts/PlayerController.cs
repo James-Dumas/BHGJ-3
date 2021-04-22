@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour
             Alive = false;
             GetComponent<Collider2D>().enabled = false;
             hotbarSelection = -1;
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isDeath", 1);
         }
     }
 }

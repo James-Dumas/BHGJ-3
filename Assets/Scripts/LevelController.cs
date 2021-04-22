@@ -50,6 +50,10 @@ public class LevelController : MonoBehaviour
     {
         started = false;
         spawnQueue = new Queue<GameObject>();
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isMenu", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isWaiting", 1);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isPlaying", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isDeath", 0);
     }
 
     void Update()
@@ -153,5 +157,7 @@ public class LevelController : MonoBehaviour
         Player.LevelStarted = true;
         PreStartOverlay.SetActive(false);
         InGameUI.SetActive(true);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isWaiting", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isPlaying", 1);
     }
 }
