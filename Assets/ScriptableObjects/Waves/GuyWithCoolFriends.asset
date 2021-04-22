@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 228eb5dbeaf365c4aad75d04c6bfdc4c, type: 3}
-  m_Name: Test Wave 5
-  m_EditorClassIdentifier: 
+  m_Name: GuyWithCoolFriends
+  m_EditorClassIdentifier: Assembly-CSharp::Wave
   Enemies:
-  - {fileID: 4604680712179667907, guid: bb6449857e514b844958b6d06371c406, type: 3}
-  - {fileID: 4604680712179667907, guid: bb6449857e514b844958b6d06371c406, type: 3}
-  - {fileID: 4604680712179667907, guid: bb6449857e514b844958b6d06371c406, type: 3}
-  - {fileID: 4604680712179667907, guid: bb6449857e514b844958b6d06371c406, type: 3}
+  - {fileID: 7254340928259352684, guid: 3854b6fff1e2dc24cb1fa6aed8899fa1, type: 3}
+  - {fileID: 7254340928259352684, guid: 3854b6fff1e2dc24cb1fa6aed8899fa1, type: 3}
   - {fileID: 4604680712179667907, guid: bb6449857e514b844958b6d06371c406, type: 3}

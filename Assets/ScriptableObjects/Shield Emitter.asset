@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Object: {fileID: 8426848614623627843, guid: 8a8bbf7394156eb4b9514d1017f129cf, type: 3}
   Tile: {fileID: 11400000, guid: 8c60cb287172fdf4f972cab866da9980, type: 2}
-  Price: 20
+  Price: 10

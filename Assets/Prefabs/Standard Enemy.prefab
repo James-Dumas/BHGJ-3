@@ -141,7 +141,7 @@ MonoBehaviour:
   MaxHealth: 16
   KillValue: 2
   FollowDistance: 6
-  BackupDistance: 4
+  BackupDistance: 2
   Projectile: {fileID: 1465232673209310760, guid: 37dbbef7274da1e4cb6028ccfba7770d, type: 3}
   SightMask:
     serializedVersion: 2
