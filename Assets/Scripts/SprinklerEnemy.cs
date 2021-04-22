@@ -10,6 +10,8 @@ public class SprinklerEnemy : BaseEnemy
     {
         base.Update();
 
+        transform.rotation = Quaternion.identity;
+
         if(canShoot)
         {
             Vector2 shootDirection;
