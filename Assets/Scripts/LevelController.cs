@@ -86,14 +86,21 @@ public class LevelController : MonoBehaviour
             if(Time.time > nextSecondTime)
             {
                 nextSecondTime += 1f;
-                countdownValue--;
-                if(countdownValue == 0)
+                if(Player.Alive)
                 {
-                    countdownValue = 10;
-                }
+                    countdownValue--;
+                    if(countdownValue == 0)
+                    {
+                        countdownValue = 10;
+                    }
 
-                Countdown.text = countdownValue.ToString();
-                Countdown.transform.localScale = new Vector3(1.4f, 1.4f, 0f);
+                    Countdown.text = countdownValue.ToString();
+                    Countdown.transform.localScale = new Vector3(1.4f, 1.4f, 0f);
+                }
+                else
+                {
+                    Countdown.text = "";
+                }
             }
 
             foreach(GameObject spawnLocation in SpawnLocations)
@@ -147,10 +154,10 @@ public class LevelController : MonoBehaviour
     public void StartLevel()
     {
         started = true;
-        startTime = Time.time + 0.1f;
+        startTime = Time.time + 0.3f;
         nextWaveTime = startTime + 10f;
-        nextSecondTime = startTime + 1f;
-        countdownValue = 10;
+        nextSecondTime = startTime;
+        countdownValue = 11;
         currentWave = 0;
         Player.Money = StartingMoney;
         Player.BeatTime = startTime;

@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8460351364747472638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BGM/isPlaying
+  m_EditorClassIdentifier: 
+  Name: isPlaying
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 --- !u!114 &-8211257580250407681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20,6 +40,46 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-7029110716908425498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BGM/isMenu
+  m_EditorClassIdentifier: 
+  Name: isMenu
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-6488133538506844554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BGM/isDead
+  m_EditorClassIdentifier: 
+  Name: isDead
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 --- !u!114 &-4568840484723453691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,11 +95,11 @@ MonoBehaviour:
   Path: Assets/FMOD/project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637546433701114015
+  lastModified: 637546450908545661
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 960
+    Value: 962
   Exists: 1
 --- !u!114 &-3673240666494369451
 MonoBehaviour:
@@ -56,7 +116,7 @@ MonoBehaviour:
   Path: Assets/FMOD/project/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 637546433701073969
+  lastModified: 637546450908445640
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -103,7 +163,7 @@ MonoBehaviour:
   - {fileID: 3476090843284316263}
   StringsBanks:
   - {fileID: -4568840484723453691}
-  stringsBankWriteTime: 637546433701114015
+  stringsBankWriteTime: 637546450908545661
   cacheVersion: 6
 --- !u!114 &934850647313964173
 MonoBehaviour:
@@ -124,11 +184,7 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
-  Parameters:
-  - {fileID: 1531421038110488580}
-  - {fileID: -8211257580250407681}
-  - {fileID: 8894789110217902583}
-  - {fileID: -1248908390878322889}
+  Parameters: []
   MinDistance: 0
   MaxDistance: 0
   Length: 98000
@@ -167,10 +223,30 @@ MonoBehaviour:
   Path: Assets/FMOD/project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637546433701103993
+  lastModified: 637546450908495653
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &6084259233737991818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BGM/isWaiting
+  m_EditorClassIdentifier: 
+  Name: isWaiting
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 --- !u!114 &8894789110217902583
 MonoBehaviour:
   m_ObjectHideFlags: 0
