@@ -135,11 +135,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 100
+  Acceleration: 10
   ShootTimer: 1
   Spread: 6
   MaxHealth: 16
   KillValue: 2
+  FollowDistance: 8
+  BackupDistance: 5
   Projectile: {fileID: 1465232673209310760, guid: 37dbbef7274da1e4cb6028ccfba7770d, type: 3}
   SightMask:
     serializedVersion: 2
     m_Bits: 1536
+  FullWallTilemap: {fileID: 0}
+  HalfWallTilemap: {fileID: 0}

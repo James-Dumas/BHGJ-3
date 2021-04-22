@@ -95,7 +95,7 @@ public class LevelController : MonoBehaviour
                     }
 
                     Countdown.text = countdownValue.ToString();
-                    Countdown.transform.localScale = new Vector3(1.4f, 1.4f, 0f);
+                    Countdown.transform.localScale = new Vector3(1.5f, 1.5f, 0f);
                 }
                 else
                 {
@@ -153,7 +153,7 @@ public class LevelController : MonoBehaviour
     public void StartLevel()
     {
         started = true;
-        startTime = Time.time + 0.3f;
+        startTime = Time.time + 0.43f;
         nextWaveTime = startTime + 10f;
         nextSecondTime = startTime;
         countdownValue = 11;
