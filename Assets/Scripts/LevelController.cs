@@ -125,9 +125,18 @@ public class LevelController : MonoBehaviour
                 }
             }
 
-            if(Input.GetButtonDown("Reset"))
+            if(Input.GetButtonDown("Reset") && !Player.Alive)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+
+            if(Input.GetButtonDown("Cancel"))
+            {
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isMenu", 1);
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isWaiting", 0);
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isPlaying", 0);
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isDeath", 0);
+                SceneManager.LoadScene("Menu");
             }
 
             Color c = ShieldTilemap.color;
