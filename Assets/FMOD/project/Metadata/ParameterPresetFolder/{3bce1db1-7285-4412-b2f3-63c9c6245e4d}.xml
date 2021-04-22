@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="ParameterPresetFolder" id="{3bce1db1-7285-4412-b2f3-63c9c6245e4d}">
+		<property name="name">
+			<value>BGM parameters</value>
+		</property>
+		<relationship name="folder">
+			<destination>{14a28465-aa12-4dc2-89dd-1185aa23d67a}</destination>
+		</relationship>
+	</object>
+</objects>

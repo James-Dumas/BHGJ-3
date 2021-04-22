@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{b8607a85-2bc0-4900-9721-37c82e7e8452}">
+		<property name="assetPath">
+			<value>y2mate.com - Elevator Music.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>61.02204081632653</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{05abc101-ad54-4af4-9696-3c9d4f7c9a5d}</destination>
+		</relationship>
+	</object>
+</objects>
