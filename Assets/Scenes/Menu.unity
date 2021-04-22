@@ -359,7 +359,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 1600, y: 100}
+  m_SizeDelta: {x: 1200, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &961566587
 MonoBehaviour:
@@ -394,7 +394,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: bullet hell game thing
+  m_Text: humanity's last stand against the killer robots
 --- !u!222 &961566588
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -853,7 +853,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -30}
-  m_SizeDelta: {x: 1200, y: 800}
+  m_SizeDelta: {x: 1500, y: 800}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1546720316
 MonoBehaviour:
@@ -888,7 +888,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Your goal is to survive the waves of killer robots.
+  m_Text: 'Earth has been overrun by killer robots that are prorammed to destroy
+    anything that moves!  Unbenkownst to the defeated armies around the world, there
+    is a lowly military construction robot that knows how to make anti-killer robot
+    weapons that don''t move.  How convenient!
+
+
+    As the construction bot, your
+    goal is to make it through the waves of killer robots.
 
     You can''t fight
     enemies yourself, but you can build defenses to help you.
