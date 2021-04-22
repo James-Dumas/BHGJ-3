@@ -11,6 +11,8 @@ public abstract class BaseEnemy : MonoBehaviour
     public float Spread = 0f;
     public int MaxHealth = 20;
     public int KillValue = 5;
+    public float FollowDistance = 6;
+    public float BackupDistance = 3;
     public GameObject Projectile;
     public LayerMask SightMask;
     public Tilemap FullWallTilemap;
@@ -33,7 +35,6 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected static Vector2Int[] adjacents;
     protected static Vector2Int[] diagonals;
-
 
     static BaseEnemy()
     {
@@ -85,15 +86,27 @@ public abstract class BaseEnemy : MonoBehaviour
             lastPathCheck = Time.time;
         }
 
-        if(path.Count > 0)
+        if(towardsPlayer.magnitude < BackupDistance && hasLineOfSight)
         {
-            Vector2 towardsNextPos = path.First.Value - (Vector2) transform.position;
-            if(towardsNextPos.magnitude < 0.71f)
-            {
-                path.RemoveFirst();
-            }
-            movement = towardsNextPos.normalized;
+            movement = -towardsPlayer.normalized;
         }
+        else if(towardsPlayer.magnitude > FollowDistance || !hasLineOfSight)
+        {
+            if(path.Count > 0)
+            {
+                Vector2 towardsNextPos = path.First.Value - (Vector2) transform.position;
+                if(towardsNextPos.magnitude < 0.71f)
+                {
+                    path.RemoveFirst();
+                }
+                movement = towardsNextPos.normalized;
+            }
+        }
+        else
+        {
+            movement = Vector2.zero;
+        }
+
 
         canShoot = false;
         if(Time.time > nextShootTime)
@@ -201,5 +214,10 @@ public abstract class BaseEnemy : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        
     }
 }
