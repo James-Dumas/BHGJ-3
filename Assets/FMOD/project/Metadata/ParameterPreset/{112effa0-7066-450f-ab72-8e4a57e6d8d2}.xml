@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<objects serializationModel="Studio.02.01.00">
+<objects serializationModel="Studio.02.00.00">
 	<object class="ParameterPreset" id="{112effa0-7066-450f-ab72-8e4a57e6d8d2}">
 		<property name="name">
 			<value>isMenu</value>
