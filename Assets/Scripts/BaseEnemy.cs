@@ -17,6 +17,7 @@ public abstract class BaseEnemy : MonoBehaviour
     public LayerMask SightMask;
     public Tilemap FullWallTilemap;
     public Tilemap HalfWallTilemap;
+    public int Parity;
 
     protected Rigidbody2D rigidbody;
     protected GameObject player;
@@ -30,6 +31,7 @@ public abstract class BaseEnemy : MonoBehaviour
     protected HashSet<Vector2Int> closedNodes;
     protected LinkedList<Vector2> path;
     protected float lastPathCheck;
+    protected List<Vector2> nearbySpawnPoints;
 
     public float BeatTime { get; set; }
 
@@ -59,12 +61,17 @@ public abstract class BaseEnemy : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         movement = Vector2.zero;
         nextShootTime = BeatTime;
+        if(Parity < 0)
+        {
+            nextShootTime += ShootTimer / 2;
+        }
         lastPathCheck = 0f;
         health = MaxHealth;
         towardsPlayer = Vector2.zero;
         openNodes = new PathfindingNodeQueue();
         closedNodes = new HashSet<Vector2Int>();
         path = new LinkedList<Vector2>();
+        nearbySpawnPoints = new List<Vector2>();
     }
 
     protected virtual void Update()
@@ -104,9 +111,19 @@ public abstract class BaseEnemy : MonoBehaviour
         }
         else
         {
-            movement = Vector2.zero;
+            movement = 0.6f * Parity * Vector2.Perpendicular(towardsPlayer).normalized;
         }
 
+        if(nearbySpawnPoints.Count > 0)
+        {
+            Vector2 awayFrom = Vector2.zero;
+            foreach(Vector2 point in nearbySpawnPoints)
+            {
+                awayFrom += (Vector2) transform.position - point;
+            }
+
+            movement = 1.2f * awayFrom.normalized;
+        }
 
         canShoot = false;
         if(Time.time > nextShootTime)
@@ -200,6 +217,8 @@ public abstract class BaseEnemy : MonoBehaviour
                 node = node.Parent;
             }
         }
+
+        Debug.Log(nearbySpawnPoints.Count);
     }
 
     public void Damage(int amount)
@@ -218,6 +237,17 @@ public abstract class BaseEnemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        
+        if(col.gameObject.layer == 15)
+        {
+            nearbySpawnPoints.Add((Vector2) col.gameObject.transform.position + col.offset);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if(col.gameObject.layer == 15)
+        {
+            nearbySpawnPoints.Remove((Vector2) col.gameObject.transform.position + col.offset);
+        }
     }
 }

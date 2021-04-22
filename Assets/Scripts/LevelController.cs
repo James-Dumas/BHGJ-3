@@ -30,6 +30,8 @@ public class LevelController : MonoBehaviour
     private int currentWave;
     private Queue<GameObject> spawnQueue;
     private Collider2D[] res = new Collider2D[1];
+    private Vector3 timerScaleBase;
+    private int enemyParity;
     private int sequenceCompletion = 0;
 
     private static string[] the_sequence = {
@@ -50,6 +52,8 @@ public class LevelController : MonoBehaviour
     {
         started = false;
         spawnQueue = new Queue<GameObject>();
+        timerScaleBase = Vector3.zero;
+        enemyParity = 1;
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isMenu", 0);
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isWaiting", 1);
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isPlaying", 0);
@@ -113,6 +117,8 @@ public class LevelController : MonoBehaviour
                         newEnemy.FullWallTilemap = FullWallTilemap;
                         newEnemy.HalfWallTilemap = HalfWallTilemap;
                         newEnemy.BeatTime = nextSecondTime;
+                        newEnemy.Parity = enemyParity;
+                        enemyParity *= -1;
                     }
                 }
             }

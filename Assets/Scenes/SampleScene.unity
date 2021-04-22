@@ -3256,7 +3256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1039867086}
   - component: {fileID: 1039867085}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Spawn1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3276,7 +3276,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.01, y: 0.01}
   serializedVersion: 2
   m_Radius: 1
 --- !u!4 &1039867086
