@@ -22,6 +22,5 @@ public class StandardEnemy : BaseEnemy
             float lookAngle = Vector2.SignedAngle(Vector2.up, rigidbody.velocity);
             transform.rotation = Quaternion.Euler(0f, 0f, lookAngle);
         }
-
     }
 }

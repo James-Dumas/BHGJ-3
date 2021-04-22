@@ -142,7 +142,6 @@ public class LevelController : MonoBehaviour
             {
                 sequenceCompletion = 0;
             }
-            Debug.Log(sequenceCompletion);
 
             if(sequenceCompletion == the_sequence.Length)
             {
