@@ -80,7 +80,7 @@ public abstract class BaseEnemy : MonoBehaviour
         {
             towardsPlayer = player.transform.position - transform.position;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, towardsPlayer, 1000f, SightMask);
-            hasLineOfSight = hit.collider.gameObject == player;
+            hasLineOfSight = hit != null && hit.collider.gameObject == player;
         }
         else
         {
@@ -217,8 +217,6 @@ public abstract class BaseEnemy : MonoBehaviour
                 node = node.Parent;
             }
         }
-
-        Debug.Log(nearbySpawnPoints.Count);
     }
 
     public void Damage(int amount)
