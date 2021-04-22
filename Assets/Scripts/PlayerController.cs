@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private int hotbarSelection;
     private bool canPlace;
     private float nextSecondTime;
+    private bool hasDamageCooldown;
+    private float lastDamageTime;
 
     public bool LevelStarted { get; set; }
     public bool Alive { get; private set; }
@@ -86,6 +88,19 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                Color c = Color.white;
+                if(Time.time - lastDamageTime < 0.5f)
+                {
+                    hasDamageCooldown = true;
+                    c = Color.red;
+                }
+                else
+                {
+                    hasDamageCooldown = false;
+                }
+
+                GetComponent<SpriteRenderer>().color = c;
+
                 if(Input.GetButtonDown("Left Click"))
                 {
                     if(hotbarSelection >= 0 && canPlace)
@@ -138,13 +153,17 @@ public class PlayerController : MonoBehaviour
 
     public void Damage(int amount)
     {
-        health -= amount;
-        if(health <= 0)
+        if(!hasDamageCooldown)
         {
-            Alive = false;
-            GetComponent<Collider2D>().enabled = false;
-            hotbarSelection = -1;
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isDeath", 1);
+            lastDamageTime = Time.time;
+            health -= amount;
+            if(health <= 0)
+            {
+                Alive = false;
+                GetComponent<Collider2D>().enabled = false;
+                hotbarSelection = -1;
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("isDeath", 1);
+            }
         }
     }
 }
