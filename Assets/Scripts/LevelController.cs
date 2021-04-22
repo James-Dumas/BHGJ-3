@@ -78,14 +78,16 @@ public class LevelController : MonoBehaviour
                 currentWave++;
             }
 
+            /*
             if(Countdown.transform.localScale.x > 1)
             {
-                Countdown.transform.localScale -= new Vector3(4f, 4f, 0f) * Time.deltaTime;
+                Countdown.transform.localScale -= new Vector3(4f, 4f, 1f) * Time.deltaTime;
             }
             else if(Countdown.transform.localScale.x < 1)
             {
-                Countdown.transform.localScale = new Vector3(1f, 1f, 0);
+                Countdown.transform.localScale = new Vector3(1f, 1f, 1);
             }
+            */
 
             if(Time.time > nextSecondTime)
             {
@@ -99,7 +101,7 @@ public class LevelController : MonoBehaviour
                     }
 
                     Countdown.text = countdownValue.ToString();
-                    Countdown.transform.localScale = new Vector3(1.5f, 1.5f, 0f);
+                    //Countdown.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
                 }
                 else
                 {
